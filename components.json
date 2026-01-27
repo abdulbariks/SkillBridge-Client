@@ -19,6 +19,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@shadcraft": "https://free.shadcraft.com/r/{name}.json"
+    "@shadcraft": "https://free.shadcraft.com/r/{name}.json",
+    "@shadcndesign": "https://shadcndesign-free.vercel.app/r/{name}.json"
   }
 }

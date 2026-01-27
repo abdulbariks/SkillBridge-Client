@@ -8,17 +8,18 @@ import { cn } from "@/lib/utils";
 import { useClickOutside } from "@/hooks/use-click-outside";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { PlaceholderLogo } from "@/components/ui/placeholder-logo";
+import Link from "next/link";
 
 // Defaults to Tailwind's md: breakpoint.
 // Change to 1024 + use lg: classes for 1024px breakpoint or whatever breakpoint you want to use
-const MOBILE_BREAKPOINT = 768;
+// const MOBILE_BREAKPOINT = 768;
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   const navigationContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile(MOBILE_BREAKPOINT);
+  const isMobile = useIsMobile();
 
   useClickOutside(navigationContainerRef, () => {
     if (isMobile && isMenuOpen) {
@@ -34,13 +35,13 @@ export function Navbar() {
       aria-label="Website top navigation"
       ref={navigationContainerRef}
     >
-      <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-x-5 px-5 md:flex-row lg:gap-x-9 lg:px-8">
+      <div className="relative container mx-auto flex  flex-col justify-between gap-x-5 px-5 md:flex-row lg:gap-x-9 lg:px-8">
         {/* Logo and Toggle Mobile Nav Button */}
         <div className="flex items-center justify-between">
           {/* Replace with actual logo */}
-          <a href="/" aria-label="Go to home page">
+          <Link href="/" aria-label="Go to home page">
             <PlaceholderLogo />
-          </a>
+          </Link>
 
           {/* Toggle Mobile Nav Button - Visible on screen sizes < 768px */}
           <Button
@@ -69,7 +70,7 @@ export function Navbar() {
               const isActive = item.href === "/pathname";
               return (
                 // Replace with actual navigation link
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className={cn(
@@ -78,7 +79,7 @@ export function Navbar() {
                   )}
                 >
                   {item.label}
-                </a>
+                </Link>
               );
             })}
           </nav>
@@ -108,7 +109,7 @@ export function Navbar() {
                   const isActive = item.href === "/pathname";
                   return (
                     // Replace with actual navigation link
-                    <a
+                    <Link
                       key={item.label}
                       href={item.href}
                       className={cn(
@@ -118,7 +119,7 @@ export function Navbar() {
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   );
                 })}
               </nav>
@@ -135,16 +136,23 @@ export function Navbar() {
 function ActionButtons() {
   return (
     <div className="flex flex-col gap-2 md:flex-row">
-      <Button variant="outline" className="w-full md:w-fit">
-        Login
-      </Button>
+      <Link href={"/login"}>
+        <Button variant="outline" className="w-full md:w-fit">
+          Login
+        </Button>
+      </Link>
+      <Link href={"/register"}>
+        <Button variant="outline" className="w-full md:w-fit">
+          Register
+        </Button>
+      </Link>
     </div>
   );
 }
 
 const NAV_ITEMS = [
-  { label: "Products", href: "#" },
-  { label: "Solutions", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "Company", href: "#" },
+  { label: "Home", href: "/" },
+  { label: "Tutors", href: "/tutors" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Contact", href: "/contact" },
 ];

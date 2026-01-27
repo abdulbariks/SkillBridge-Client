@@ -1,3 +1,4 @@
+import { Footer } from "@/components/commonLayout/Footer";
 import { Navbar } from "@/components/commonLayout/Navbar";
 
 export default function CommonLayout({
@@ -9,6 +10,7 @@ export default function CommonLayout({
     <div>
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 }

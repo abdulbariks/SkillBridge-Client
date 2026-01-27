@@ -1,0 +1,86 @@
+import {
+  ProfileCard,
+  ProfileCardAvatar,
+  ProfileCardDetails,
+} from "@/components/ui/profile-card";
+import {
+  SectionHeading,
+  SectionHeadingBody,
+  SectionHeadingTagline,
+  SectionHeadingTitle,
+} from "@/components/ui/section-heading";
+
+export function Team() {
+  return (
+    <section className="py-12 lg:py-20">
+      <div className="container mx-auto flex flex-col gap-12 px-5 lg:gap-16 lg:px-8">
+        {/* Section Heading */}
+        <SectionHeading alignment="center" className="mx-auto w-full max-w-3xl">
+          <SectionHeadingTagline>Team</SectionHeadingTagline>
+          <SectionHeadingTitle>
+            Meet The People Behind Acme AI
+          </SectionHeadingTitle>
+          <SectionHeadingBody>
+            We are a team of builders, designers, and problem-solvers dedicated
+            to helping you work smarter every day.
+          </SectionHeadingBody>
+        </SectionHeading>
+
+        {/* Team Members */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-9">
+          {teamMembersData.map((member) => (
+            <ProfileCard
+              key={member.name}
+              variant="default"
+              className="rounded-xl border bg-card p-2 shadow-sm"
+            >
+              <ProfileCardAvatar
+                src={member.image}
+                name={member.name}
+                className="size-32 rounded-lg"
+              />
+              <ProfileCardDetails
+                className="self-end-safe border-l-2 border-primary pl-2"
+                name={member.name}
+                body={member.title}
+              />
+            </ProfileCard>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const teamMembersData = [
+  {
+    name: "Sophie Tan",
+    title: "Founder & CEO",
+    image: "https://free.shadcraft.com/assets/avatars/person-1.webp",
+  },
+  {
+    name: "Liam Johnson",
+    title: "Chief Technology Officer",
+    image: "https://free.shadcraft.com/assets/avatars/person-2.webp",
+  },
+  {
+    name: "Ava Smith",
+    title: "Head of Marketing",
+    image: "https://free.shadcraft.com/assets/avatars/person-3.webp",
+  },
+  {
+    name: "Noah Brown",
+    title: "Product Manager",
+    image: "https://free.shadcraft.com/assets/avatars/person-4.webp",
+  },
+  {
+    name: "Emma Wilson",
+    title: "Lead Designer",
+    image: "https://free.shadcraft.com/assets/avatars/person-5.webp",
+  },
+  {
+    name: "Oliver Lee",
+    title: "Data Analyst",
+    image: "https://free.shadcraft.com/assets/avatars/person-6.webp",
+  },
+];
