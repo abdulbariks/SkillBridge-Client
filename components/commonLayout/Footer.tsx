@@ -56,7 +56,7 @@ export function Footer() {
         {/* Social Links and Copyright */}
         <div className="w-full">
           <p className="text-sm text-muted-foreground">
-            &copy; Copyright Acme Inc. 2025. All right reserved.
+            &copy; Copyright Skill Bridge 2025. All right reserved.
           </p>
         </div>
       </div>

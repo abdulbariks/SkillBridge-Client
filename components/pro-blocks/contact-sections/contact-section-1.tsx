@@ -18,8 +18,6 @@ export function ContactSection() {
         <div className="flex flex-col items-center gap-10 md:gap-12">
           {/* Section Title */}
           <div className="section-title-gap-lg mx-auto flex max-w-xl flex-col items-center text-center">
-            {/* Tagline */}
-            <Tagline>Contact Section</Tagline>
             {/* Main Heading */}
             <h1 id="contact-heading" className="heading-lg">
               Get in touch

@@ -18,10 +18,10 @@ export function HeroSection() {
           {/* Section Title */}
           <div className="section-title-gap-xl flex flex-col">
             {/* Tagline */}
-            <Tagline>Hero Section</Tagline>
+            <Tagline>Skill Bridge</Tagline>
             {/* Main Heading */}
             <h1 id="hero-heading" className="heading-xl">
-              Headline that solves user&apos;s main problem
+              Headline that solves Student&apos;s main problem
             </h1>
             {/* Description */}
             <p className="text-muted-foreground text-base lg:text-lg">

@@ -18,7 +18,7 @@ export function Team() {
         <SectionHeading alignment="center" className="mx-auto w-full max-w-3xl">
           <SectionHeadingTagline>Team</SectionHeadingTagline>
           <SectionHeadingTitle>
-            Meet The People Behind Acme AI
+            Meet The People Behind Skill Bridge
           </SectionHeadingTitle>
           <SectionHeadingBody>
             We are a team of builders, designers, and problem-solvers dedicated

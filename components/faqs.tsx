@@ -52,14 +52,14 @@ export function Faqs() {
 
 const faqsData = [
   {
-    question: "What is Acme Inc.?",
+    question: "What is Skill Bridge?",
     answer:
-      "Acme Inc. is a productivity platform designed to help teams work smarter and faster. It provides tools for collaboration, project management, and workflow optimization.",
+      "Skill Bridge is a productivity platform designed to help teams work smarter and faster. It provides tools for collaboration, project management, and workflow optimization.",
   },
   {
     question: "How do I get started?",
     answer:
-      "Getting started is easy. Sign up for a free account, complete the onboarding process, and you'll be ready to use Acme Inc. in minutes.",
+      "Getting started is easy. Sign up for a free account, complete the onboarding process, and you'll be ready to use Skill Bridge in minutes.",
   },
   {
     question: "What are the pricing plans?",
