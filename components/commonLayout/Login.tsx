@@ -21,6 +21,8 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 // Validation schema using zod
 const registerSchema = z.object({
@@ -32,6 +34,7 @@ const registerSchema = z.object({
 });
 
 export function Login() {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
       email: "",
@@ -40,16 +43,36 @@ export function Login() {
     validators: {
       onSubmit: registerSchema,
     },
+    // onSubmit: async ({ value }) => {
+    //   // Here you would call your API to register the user
+    //   toast("Login successful!", {
+    //     description: (
+    //       <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
+    //         <code>{JSON.stringify(value, null, 2)}</code>
+    //       </pre>
+    //     ),
+    //   });
+    //   form.reset();
+    // },
     onSubmit: async ({ value }) => {
-      // Here you would call your API to register the user
-      toast("Login successful!", {
-        description: (
-          <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-            <code>{JSON.stringify(value, null, 2)}</code>
-          </pre>
-        ),
-      });
-      form.reset();
+      const toastId = toast.loading("Logging in");
+      try {
+        const { data, error } = await authClient.signIn.email(value);
+        console.log("====================================");
+        console.log(data);
+        console.log("====================================");
+
+        if (error) {
+          toast.error(error.message, { id: toastId });
+          return;
+        }
+
+        toast.success("User Logged in Successfully", { id: toastId });
+
+        router.push("/");
+      } catch (err) {
+        toast.error("Something went wrong, please try again.", { id: toastId });
+      }
     },
   });
 
