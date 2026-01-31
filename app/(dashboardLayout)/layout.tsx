@@ -14,18 +14,23 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { Roles } from "@/constants/roles";
+import { userService } from "@/services/user.service";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   admin,
   user,
+  tutor,
 }: {
   admin: React.ReactNode;
   user: React.ReactNode;
+  tutor: React.ReactNode;
 }) {
-  const isAdmin = false;
+  const { data } = await userService.getSession();
+  const userInfo = data.user;
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar user={userInfo} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
           <div className="flex items-center gap-2 px-4">
@@ -54,7 +59,7 @@ export default function DashboardLayout({
             <div className="aspect-video rounded-xl bg-muted/50" />
           </div>
           <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min">
-            {isAdmin ? admin : user}
+            {userInfo.role === Roles.admin ? admin : Roles.tutor ? tutor : user}
           </div>
         </div>
       </SidebarInset>

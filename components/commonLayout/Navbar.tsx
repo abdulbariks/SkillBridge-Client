@@ -13,7 +13,7 @@ import { userService } from "@/services/user.client";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [session, setSession] = useState<any>(null); // null if not logged in
+  const [session, setSession] = useState<any>(null);
   const navigationContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
   const router = useRouter();
@@ -134,8 +134,6 @@ export function Navbar() {
 }
 
 function ActionButtons({ session, handleLogout, router }: any) {
-
-  
   if (!session) {
     return (
       <div className="flex flex-col gap-2 md:flex-row">
