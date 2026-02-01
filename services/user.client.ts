@@ -1,6 +1,3 @@
-import { env } from "@/env";
-
-// services/user.client.ts
 const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_URL!
 
 export const userService = {
