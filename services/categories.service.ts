@@ -1,4 +1,7 @@
+
+
 import { env } from "@/env";
+// import { cookies } from "next/headers";
 
 const API_URL = env.API_URL;
 
@@ -15,6 +18,12 @@ interface GetBlogsParams {
   isFeatured?: boolean;
   search?: string;
 }
+
+export interface CreateCategoryPayload {
+  name: string;
+}
+
+// const cookieStore = await cookies();
 
 export const categoriesService = {
   getCategories: async function (
@@ -57,15 +66,35 @@ export const categoriesService = {
     }
   },
 
-//   getBlogById: async function (id: string) {
-//     try {
-//       const res = await fetch(`${API_URL}/posts/${id}`);
 
-//       const data = await res.json();
+   // CREATE CATEGORY (POST)
+  createCategory: async function (
+    payload: CreateCategoryPayload,
+  ) {
+    try {
+      const res = await fetch(`${API_URL}/categories`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        //   Cookie: cookieStore.toString()
+        },
+        body: JSON.stringify(payload),
+        cache: "no-store",
+      });
 
-//       return { data: data, error: null };
-//     } catch (err) {
-//       return { data: null, error: { message: "Something Went Wrong" } };
-//     }
-//   },
+      if (!res.ok) {
+        throw new Error("Failed to create category");
+      }
+
+      const data = await res.json();
+
+      return { data, error: null };
+    } catch (err) {
+      return {
+        data: null,
+        error: { message: "Something Went Wrong while creating category" },
+      };
+    }
+  },
+
 };

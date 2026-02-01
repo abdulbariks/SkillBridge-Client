@@ -30,7 +30,7 @@ export const bookingService = {
         });
       }
 
-       const cookieStore = await cookies();
+      const cookieStore = await cookies();
       const config: RequestInit = {
         method: "GET",
         headers: {

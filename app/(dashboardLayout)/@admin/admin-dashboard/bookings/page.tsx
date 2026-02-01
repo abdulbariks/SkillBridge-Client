@@ -32,7 +32,7 @@ export default async function AdminBookingManagementPage() {
   console.log("====================================");
   return (
     <div className="min-h-screen flex-1 rounded-xl bg-muted/50 md:min-h-min">
-      <DataTable columns={columns} data={data.data} />
+      {/* <DataTable columns={columns} data={data} /> */}
     </div>
   );
 }
