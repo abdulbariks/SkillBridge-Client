@@ -67,3 +67,17 @@ export async function getBookings() {
 
   return res.json();
 }
+
+export async function getAllTutors() {
+  const res = await fetch("http://localhost:5000/v1/api/tutors", {
+    headers: {
+    },
+    cache: "no-store", // always fresh
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
+  return res.json();
+}

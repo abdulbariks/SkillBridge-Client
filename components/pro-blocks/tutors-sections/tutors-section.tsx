@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
@@ -19,56 +19,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { tutorService } from "@/services/tutor.services";
 
-interface BlogPost {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
-  image: string;
+interface Tutor {
+  id: string;
+  bio: string;
+  hourlyRate: number;
+  experience: number;
+  available: boolean;
+  isVerified: boolean;
+  user: {
+    name: string;
+    email: string;
+    image: string | null;
+  };
+  categories: {
+    id: string;
+    name: string;
+  }[];
+  reviews: {
+    rating: number;
+  }[];
 }
 
-const BLOG_POSTS: BlogPost[] = [
-  {
-    id: 1,
-    title: "Getting Started with shadcn/ui: A Complete Guide",
-    description:
-      "Learn how to set up and maximize your development workflow with shadcn/ui's powerful component library.",
-    date: "Mar 15, 2024",
-    category: "Tutorial",
-    image: "https://ui.shadcn.com/placeholder.svg",
-  },
-  {
-    id: 2,
-    title: "Building Dark Mode with Next.js and Tailwind CSS",
-    description:
-      "Implement a seamless dark mode toggle in your Next.js application using Tailwind CSS and shadcn/ui.",
-    date: "Mar 12, 2024",
-    category: "Development",
-    image: "https://ui.shadcn.com/placeholder.svg",
-  },
-  {
-    id: 3,
-    title: "Mastering React Server Components",
-    description:
-      "Deep dive into React Server Components and learn how they can improve your application's performance.",
-    date: "Mar 8, 2024",
-    category: "Advanced",
-    image: "https://ui.shadcn.com/placeholder.svg",
-  },
-  {
-    id: 4,
-    title: "The Future of Web Development in 2024",
-    description:
-      "Explore the latest trends and technologies shaping the future of web development this year.",
-    date: "Mar 5, 2024",
-    category: "Insights",
-    image: "https://ui.shadcn.com/placeholder.svg",
-  },
-];
+export async function TutorsSection() {
+  const { data } = await tutorService.getBlogPosts(
+    {
+      isFeatured: false,
+    },
+    {
+      cache: "no-store",
+    },
+  );
 
-export function TutorsSection() {
+  const tutors: Tutor[] = data?.data ?? [];
   return (
     <section
       className="bg-background section-padding-y"
@@ -102,56 +86,50 @@ export function TutorsSection() {
             </Select>
           </div>
         </div>
-        <div className="flex flex-col items-center gap-10 md:gap-12">
-          {/* Blog Grid */}
-          <div
-            className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-4"
-            role="list"
-          >
-            {BLOG_POSTS.map((post) => (
-              <Link href="#" key={post.id} className="group block">
-                {/* Blog Card */}
-                <div className="flex flex-col gap-4 rounded-xl transition-all duration-200">
-                  {/* Image Wrapper */}
-                  <AspectRatio
-                    ratio={4 / 3}
-                    className="overflow-hidden rounded-xl"
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {tutors.map((tutor) => (
+            <Link
+              key={tutor.id}
+              href={`/tutor/${tutor.id}`}
+              className="group block"
+            >
+              <div className="flex flex-col gap-4 rounded-xl border p-4 hover:shadow-md transition">
+                {/* Image */}
+                <AspectRatio
+                  ratio={4 / 3}
+                  className="overflow-hidden rounded-xl"
+                >
+                  <Image
+                    src={tutor.user.image || "/images/SkillBridge-Logo.png"}
+                    alt={tutor.user.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition"
+                  />
+                </AspectRatio>
+
+                {/* Content */}
+                <div className="space-y-2">
+                  <CardTitle>{tutor.user.name}</CardTitle>
+
+                  <CardDescription className="line-clamp-2">
+                    {tutor.bio}
+                  </CardDescription>
+
+                  <div className="text-sm text-muted-foreground">
+                    💰 ${tutor.hourlyRate}/hr · 🎓 {tutor.experience} yrs
+                  </div>
+
+                  <div
+                    className={`text-xs font-medium ${
+                      tutor.available ? "text-green-600" : "text-red-500"
+                    }`}
                   >
-                    <Image
-                      src={post.image}
-                      alt={`${post.title} thumbnail`}
-                      fill
-                      className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
-                    />
-                  </AspectRatio>
-
-                  {/* Post Content */}
-                  <div className="flex flex-col gap-3">
-                    {/* Post Meta */}
-                    <div className="flex items-center gap-2 text-left">
-                      <span className="text-muted-foreground text-sm">
-                        {post.date}
-                      </span>
-                      <span className="text-muted-foreground text-sm">·</span>
-                      <span className="text-muted-foreground text-sm">
-                        {post.category}
-                      </span>
-                    </div>
-
-                    {/* Post Title */}
-                    <h3 className="text-base leading-normal font-semibold group-hover:underline">
-                      {post.title}
-                    </h3>
-
-                    {/* Post Summary */}
-                    <p className="text-muted-foreground text-sm leading-normal">
-                      {post.description}
-                    </p>
+                    {tutor.available ? "Available" : "Unavailable"}
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
