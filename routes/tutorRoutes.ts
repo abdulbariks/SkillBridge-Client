@@ -18,6 +18,7 @@ export const tutorRoutes: SidebarRoutes = {
       icon: Settings2,
       items: [
         { title: "Availability", url: "/tutor-dashboard/availability" },
+        { title: "Bookings", url: "/tutor-dashboard/bookings" },
       ],
     },
   ],

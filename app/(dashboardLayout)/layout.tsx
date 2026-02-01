@@ -53,7 +53,11 @@ export default async function DashboardLayout({
           </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          {userInfo.role === Roles.admin ? admin : Roles.tutor ? tutor : user}
+          {userInfo.role === Roles.admin
+            ? admin
+            : userInfo.role === Roles.tutor
+              ? tutor
+              : user}
         </div>
       </SidebarInset>
     </SidebarProvider>
