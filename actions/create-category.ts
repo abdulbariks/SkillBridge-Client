@@ -119,3 +119,26 @@ export async function createBooking(data: {
 
   return res.json();
 }
+export async function createTutorProfileAction(data: {
+  bio?: string;
+  hourlyRate: number;
+  experience: string;
+  categories: { id: string }[];
+}) {
+  const cookieStore = await cookies();
+  const res = await fetch("http://localhost:5000/v1/api/tutors", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+}
+
+
+
+
+

@@ -100,7 +100,8 @@ export async function TutorsSection() {
                   className="overflow-hidden rounded-xl"
                 >
                   <Image
-                    src={tutor.user.image || "/images/SkillBridge-Logo.png"}
+                    src={"/images/SkillBridge-Logo.png"}
+                    // src={tutor.user.image || "/images/SkillBridge-Logo.png"}
                     alt={tutor.user.name}
                     fill
                     className="object-cover group-hover:scale-105 transition"
