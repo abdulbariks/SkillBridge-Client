@@ -90,7 +90,7 @@ export async function TutorsSection() {
           {tutors.map((tutor) => (
             <Link
               key={tutor.id}
-              href={`/tutor/${tutor.id}`}
+              href={`/tutors/${tutor.id}`}
               className="group block"
             >
               <div className="flex flex-col gap-4 rounded-xl border p-4 hover:shadow-md transition">

@@ -37,16 +37,26 @@ interface TutorDetailsPageProps {
   };
 }
 
+export async function generateStaticParams() {
+  const { data } = await tutorService.getBlogPosts();
+
+  return data?.data?.map((blog: Tutor) => ({ id: blog.id })).splice(0, 3);
+}
+
 export default async function TutorDetailsPage({
   params,
 }: TutorDetailsPageProps) {
-  const { id } = params;
+  const { id } = await params;
 
   console.log("====================================");
   console.log(id);
   console.log("====================================");
 
   const { data: tutor, error } = await tutorService.getBlogById(id);
+
+  console.log("====================================");
+  console.log(tutor);
+  console.log("====================================");
 
   if (error) {
     return (
@@ -60,25 +70,24 @@ export default async function TutorDetailsPage({
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold">{tutor.user.name}</h1>
-      <p className="text-muted-foreground my-2">{tutor.bio}</p>
-
+      <h1 className="text-3xl font-bold">{tutor?.data?.user?.name}</h1>
+      <p className="text-muted-foreground my-2">{tutor?.data?.bio}</p>
       <div className="flex gap-4 my-4">
         <div>
-          <strong>Hourly Rate:</strong> ${tutor.hourlyRate}/hr
+          <strong>Hourly Rate:</strong> ${tutor?.data?.hourlyRate}/hr
         </div>
         <div>
-          <strong>Experience:</strong> {tutor.experience} years
+          <strong>Experience:</strong> {tutor?.data?.experience} years
         </div>
         <div>
           <strong>Availability:</strong>{" "}
-          {tutor.available ? "Available" : "Unavailable"}
+          {tutor?.data?.available ? "Available" : "Unavailable"}
         </div>
       </div>
 
       <div className="my-4">
         <strong>Categories:</strong>{" "}
-        {tutor.categories.map((cat: Category) => (
+        {tutor?.data?.categories.map((cat: Category) => (
           <span key={cat.id} className="mr-2 px-2 py-1 bg-gray-200 rounded">
             {cat.name}
           </span>
@@ -87,9 +96,9 @@ export default async function TutorDetailsPage({
 
       <div className="my-4">
         <strong>Reviews:</strong>
-        {tutor.reviews.length ? (
+        {tutor?.data?.reviews.length ? (
           <ul className="list-disc list-inside">
-            {tutor.reviews.map((review: Review) => (
+            {tutor?.data?.reviews.map((review: Review) => (
               <li key={review.id}>
                 Rating: {review.rating} / 5{" "}
                 {review.comment && `- ${review.comment}`}
