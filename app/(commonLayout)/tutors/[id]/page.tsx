@@ -1,4 +1,5 @@
 // app/tutor/[id]/page.tsx
+import { CreateReviews } from "@/components/commonLayout/CreateReviews";
 import { tutorService } from "@/services/tutor.services";
 import React from "react";
 
@@ -109,6 +110,7 @@ export default async function TutorDetailsPage({
           <p>No reviews yet</p>
         )}
       </div>
+      <CreateReviews tutorId = {tutor?.data?.id} />
     </div>
   );
 }

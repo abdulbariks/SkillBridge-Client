@@ -81,3 +81,23 @@ export async function getAllTutors() {
 
   return res.json();
 }
+
+
+
+export async function createReview(data: {
+  tutorId: string;
+  rating: number;
+  comment: string;
+}) {
+  const cookieStore = await cookies();
+  const res = await fetch ("http://localhost:5000/v1/api/reviews", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+}
