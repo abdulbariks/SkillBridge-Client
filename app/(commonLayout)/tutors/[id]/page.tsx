@@ -1,5 +1,6 @@
 // app/tutor/[id]/page.tsx
 import { CreateReviews } from "@/components/commonLayout/CreateReviews";
+import { BookingModal } from "@/components/commonLayout/modal/BookingModal";
 import { tutorService } from "@/services/tutor.services";
 import React from "react";
 
@@ -95,6 +96,8 @@ export default async function TutorDetailsPage({
         ))}
       </div>
 
+      <BookingModal tutorId={tutor?.data?.id} />
+
       <div className="my-4">
         <strong>Reviews:</strong>
         {tutor?.data?.reviews.length ? (
@@ -110,7 +113,7 @@ export default async function TutorDetailsPage({
           <p>No reviews yet</p>
         )}
       </div>
-      <CreateReviews tutorId = {tutor?.data?.id} />
+      <CreateReviews tutorId={tutor?.data?.id} />
     </div>
   );
 }

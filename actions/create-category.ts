@@ -101,3 +101,21 @@ export async function createReview(data: {
 
   return res.json();
 }
+
+export async function createBooking(data: {
+  tutorId: string;
+  startTime: string;
+  endTime: string;
+}) {
+  const cookieStore = await cookies();
+  const res = await fetch ("http://localhost:5000/v1/api/bookings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookieStore.toString(),
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+}
