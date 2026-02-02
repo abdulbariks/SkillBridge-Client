@@ -2,6 +2,7 @@ import { getUsers } from "@/actions/create-category";
 import { DataTable } from "@/components/admin-dashboard/users/UsersManagementTable";
 import { columns } from "@/components/admin-dashboard/users/UsersTable";
 import React from "react";
+export const dynamic = "force-dynamic";
 
 export default async function AdminUserManagementPage() {
   const users = await getUsers();

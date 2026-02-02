@@ -39,7 +39,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      const userId = row.original;
+      // const userId = row.original;
 
       return (
         <DropdownMenu>

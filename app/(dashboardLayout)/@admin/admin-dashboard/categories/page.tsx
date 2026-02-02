@@ -3,6 +3,7 @@ import { CreateCategory } from "@/components/admin-dashboard/categories/careateC
 import { DataTable } from "@/components/admin-dashboard/categories/CategoryManagemantTable";
 import { columns } from "@/components/admin-dashboard/categories/CategoryTable";
 import React from "react";
+export const dynamic = "force-dynamic";
 
 export default async function AdminCategoriesManagementPage() {
   const categories = await getCategories();

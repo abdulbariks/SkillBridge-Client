@@ -1,1 +1,1 @@
-export type * from "./routes.type";
+export type * from "./sidebar.ts";

@@ -1,8 +1,8 @@
 import { getBookings } from "@/actions/create-category";
 import { DataTable } from "@/components/admin-dashboard/bookings/BookingManagementTable";
 import { columns } from "@/components/dashboard/bookings/BookingsTable";
-
 import React from "react";
+export const dynamic = "force-dynamic";
 
 export default async function TutorBookingManagementPage() {
   const bookings = await getBookings();

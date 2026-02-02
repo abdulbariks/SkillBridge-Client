@@ -3,6 +3,7 @@ import { CreateReviews } from "@/components/commonLayout/CreateReviews";
 import { BookingModal } from "@/components/commonLayout/modal/BookingModal";
 import { tutorService } from "@/services/tutor.services";
 import React from "react";
+export const dynamic = "force-dynamic";
 
 interface User {
   name: string;
@@ -39,26 +40,18 @@ interface TutorDetailsPageProps {
   };
 }
 
-export async function generateStaticParams() {
-  const { data } = await tutorService.getBlogPosts();
+// export async function generateStaticParams() {
+//   const { data } = await tutorService.getBlogPosts();
 
-  return data?.data?.map((blog: Tutor) => ({ id: blog.id })).splice(0, 3);
-}
+//   return data?.data?.map((blog: Tutor) => ({ id: blog.id })).splice(0, 3);
+// }
 
 export default async function TutorDetailsPage({
   params,
 }: TutorDetailsPageProps) {
   const { id } = await params;
 
-  console.log("====================================");
-  console.log(id);
-  console.log("====================================");
-
   const { data: tutor, error } = await tutorService.getBlogById(id);
-
-  console.log("====================================");
-  console.log(tutor);
-  console.log("====================================");
 
   if (error) {
     return (
@@ -70,6 +63,7 @@ export default async function TutorDetailsPage({
     return <div className="text-gray-600">Tutor not found</div>;
   }
 
+  const reviews = tutor?.data?.reviews ?? [];
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold">{tutor?.data?.user?.name}</h1>
@@ -100,9 +94,9 @@ export default async function TutorDetailsPage({
 
       <div className="my-4">
         <strong>Reviews:</strong>
-        {tutor?.data?.reviews.length ? (
-          <ul className="list-disc list-inside">
-            {tutor?.data?.reviews.map((review: Review) => (
+        {reviews.length > 0 ? (
+          <ul>
+            {reviews.map((review: Review) => (
               <li key={review.id}>
                 Rating: {review.rating} / 5{" "}
                 {review.comment && `- ${review.comment}`}
@@ -113,6 +107,7 @@ export default async function TutorDetailsPage({
           <p>No reviews yet</p>
         )}
       </div>
+
       <CreateReviews tutorId={tutor?.data?.id} />
     </div>
   );
