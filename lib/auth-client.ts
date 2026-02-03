@@ -1,8 +1,19 @@
-import { createAuthClient } from 'better-auth/react';
+// import { createAuthClient } from 'better-auth/react';
+
+// export const authClient = createAuthClient({
+//   baseURL: "https://skill-bridge-server-mu.vercel.app",
+//   fetchOptions: {
+//     credentials: "include",
+//   },
+// });
+
+
+import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: "https://skill-bridge-server-mu.vercel.app",
+  baseURL: typeof window !== "undefined" ? window.location.origin : "",
   fetchOptions: {
     credentials: "include",
   },
 });
+

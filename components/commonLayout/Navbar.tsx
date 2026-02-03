@@ -18,6 +18,10 @@ export function Navbar() {
   const isMobile = useIsMobile();
   const router = useRouter();
 
+  console.log("====================================");
+  console.log(session);
+  console.log("====================================");
+
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   useClickOutside(navigationContainerRef, () => {

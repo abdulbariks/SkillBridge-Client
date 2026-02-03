@@ -3,13 +3,13 @@ const AUTH_URL = process.env.NEXT_PUBLIC_AUTH_URL!
 export const userService = {
   getSession: async () => {
     try {
-      const res = await fetch(`${AUTH_URL}/get-session`, {
+      const res = await fetch(`${AUTH_URL}/api/auth/get-session`, {
         credentials: "include", // include cookies in browser
       });
 
-      // console.log('====================================');
-      // console.log(res);
-      // console.log('====================================');
+      console.log('====================================');
+      console.log(res);
+      console.log('====================================');
       if (!res.ok) return { data: null, error: { message: "No session" } };
       const data = await res.json();
       return { data, error: null };
@@ -21,7 +21,7 @@ export const userService = {
 
   logout: async () => {
     try {
-      const res = await fetch(`${AUTH_URL}/sign-out`, {
+      const res = await fetch(`${AUTH_URL}/api/auth/sign-out`, {
         method: "POST",
         credentials: "include",
       });
