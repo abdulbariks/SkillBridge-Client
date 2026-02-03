@@ -1,11 +1,14 @@
 "use server";
 
+import { env } from "@/env";
 import { cookies } from "next/headers";
+
+const API_URL = env.API_URL;
 
 
 export async function createCategory(data: { name: string }) {
   const cookieStore = await cookies();
-  const res = await fetch("http://localhost:5000/v1/api/categories", {
+  const res = await fetch(`${API_URL}/categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -21,7 +24,7 @@ export async function createCategory(data: { name: string }) {
 
 export async function getCategories() {
  const cookieStore = await cookies();
-  const res = await fetch("http://localhost:5000/v1/api/categories", {
+  const res = await fetch(`${API_URL}/categories`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -38,7 +41,7 @@ export async function getCategories() {
 
 export async function getUsers() {
  const cookieStore = await cookies();
-  const res = await fetch("http://localhost:5000/v1/api/users", {
+  const res = await fetch(`${API_URL}/users`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -46,7 +49,7 @@ export async function getUsers() {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch categories");
+    throw new Error("Failed to fetch users");
   }
 
   return res.json();
@@ -54,7 +57,7 @@ export async function getUsers() {
 
 export async function getBookings() {
  const cookieStore = await cookies();
-  const res = await fetch("http://localhost:5000/v1/api/bookings", {
+  const res = await fetch(`${API_URL}/bookings`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -62,21 +65,21 @@ export async function getBookings() {
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch categories");
+    throw new Error("Failed to fetch bookings");
   }
 
   return res.json();
 }
 
 export async function getAllTutors() {
-  const res = await fetch("http://localhost:5000/v1/api/tutors", {
+  const res = await fetch(`${API_URL}/tutors`, {
     headers: {
     },
     cache: "no-store", // always fresh
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch categories");
+    throw new Error("Failed to fetch tutors");
   }
 
   return res.json();
@@ -90,7 +93,7 @@ export async function createReview(data: {
   comment: string;
 }) {
   const cookieStore = await cookies();
-  const res = await fetch ("http://localhost:5000/v1/api/reviews", {
+  const res = await fetch(`${API_URL}/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -108,7 +111,7 @@ export async function createBooking(data: {
   endTime: string;
 }) {
   const cookieStore = await cookies();
-  const res = await fetch ("http://localhost:5000/v1/api/bookings", {
+  const res = await fetch(`${API_URL}/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -126,7 +129,7 @@ export async function createTutorProfileAction(data: {
   categories: { id: string }[];
 }) {
   const cookieStore = await cookies();
-  const res = await fetch("http://localhost:5000/v1/api/tutors", {
+  const res = await fetch(`${API_URL}/tutors`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
