@@ -9,7 +9,7 @@ SkillBridge is a full-stack web application that connects learners with expert t
 
 - https://skill-bridge-client-olive.vercel.app/
 
-## 🗂 Backend Repository
+## 🗂 Frontend Repository
 
 - https://github.com/abdulbariks/SkillBridge-Client
 
@@ -55,7 +55,7 @@ This repository contains the **frontend application**, built with **Next.js**, d
 - **Zod** (validation)
 - **Better Auth (Client)**
 - **Redux Toolkit**
-- **Fetch API / Axios**
+- **Fetch API**
 
 ---
 
@@ -167,6 +167,8 @@ git clone https://github.com/abdulbariks/SkillBridge-Client
 cd SkillBridge-Client
 pnpm install
 ```
+
+## Environment Variables
 
 ```ts
 BACKEND_URL="BACKEND_URL"
