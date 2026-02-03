@@ -1,36 +1,181 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SkillBridge 🎓
 
-## Getting Started
+SkillBridge is a full-stack web application that connects learners with expert tutors. Students can browse tutor profiles, view availability, and book sessions instantly. Tutors can manage their profiles, set availability, and track their teaching sessions. Admins oversee the platform and manage users.
+**Connect with Expert Tutors, Learn Anything**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌐 Live Website
+
+- https://skill-bridge-client-olive.vercel.app/
+
+## 🗂 Frontend Repository
+
+- https://github.com/abdulbariks/SkillBridge-Client
+
+## 🔗 Backend API
+
+- https://skill-bridge-server-mu.vercel.app
+
+## 🗂 Backend Repository
+
+- https://github.com/abdulbariks/SkillBridge-Server
+
+---
+
+## 📌 Project Overview
+
+SkillBridge is a full-stack tutoring platform that connects learners with expert tutors.  
+This repository contains the **frontend application**, built with **Next.js**, delivering a fast, responsive, and user-friendly experience for students, tutors, and admins.
+
+---
+
+## 👥 Roles & Permissions
+
+| Role | Description | Key Permissions |
+|------|-------------|----------------|
+| **Student** | Learners who book tutoring sessions | Browse tutors, book sessions, leave reviews, manage profile |
+| **Tutor** | Experts offering tutoring services | Create profile, set availability, view bookings |
+| **Admin** | Platform managers | Manage users, categories, and bookings |
+
+> 💡 Users choose their role during registration. Admin accounts are managed from the backend.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- **Next.js (App Router)**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+- **Shadcn/UI**
+- **TanStack Form**
+- **Zod** (validation)
+- **Better Auth (Client)**
+- **Redux Toolkit**
+- **Fetch API**
+
+---
+
+## ✨ Features
+
+### 🌍 Public Features
+
+- Browse tutors with filters
+- View tutor profiles with reviews
+- Search by category, rating, and price
+- Landing page with featured tutors
+
+### 👨‍🎓 Student Features
+
+- Register & login
+- Book tutoring sessions
+- View upcoming & past bookings
+- Leave reviews
+- Manage profile
+
+### 👨‍🏫 Tutor Features
+
+- Register & login
+- Create & update tutor profile
+- Set availability slots
+- View teaching sessions
+- See ratings & reviews
+
+### 🛡 Admin Features
+
+- View all users
+- Ban / unban users
+- Manage categories
+- View all bookings
+
+---
+
+## 🧭 Pages & Routes
+
+> ⚠️ Routes may change based on implementation.
+
+### Public Routes
+
+| Route | Description |
+|------|-------------|
+| `/` | Home |
+| `/tutors` | Browse tutors |
+| `/tutors/[id]` | Tutor profile |
+| `/login` | Login |
+| `/register` | Register |
+
+### Student Routes (Protected)
+
+| Route | Description |
+|------|-------------|
+| `/dashboard` | Student dashboard |
+| `/dashboard/bookings` | My bookings |
+| `/dashboard/profile` | Profile settings |
+
+### Tutor Routes (Protected)
+
+| Route | Description |
+|------|-------------|
+| `/tutor/dashboard` | Tutor dashboard |
+| `/tutor/profile` | Tutor profile |
+| `/tutor/availability` | Availability management |
+
+### Admin Routes (Protected)
+
+| Route | Description |
+|------|-------------|
+| `/admin` | Admin dashboard |
+| `/admin/users` | Manage users |
+| `/admin/bookings` | View bookings |
+| `/admin/categories` | Manage categories |
+
+---
+
+## 📁 Project Structure
+
+```ts
+app/
+├── (auth)/
+│   ├── login/
+│   ├── register/
+├── (public)/
+│   ├── tutors/
+│   ├── tutors/[id]/
+├── dashboard/
+├── tutor/
+├── admin/
+├── layout.tsx
+├── page.tsx
+components/
+├── ui/
+├── common/
+├── forms/
+lib/
+├── auth-client.ts
+├── api.ts
+redux/
+├── store.ts
+├── features/
+styles/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```ts
+git clone https://github.com/abdulbariks/SkillBridge-Client
+cd SkillBridge-Client
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```ts
+BACKEND_URL="BACKEND_URL"
+FRONTEND_URL="FRONTEND_URL"
+```
 
-## Learn More
+```ts
+pnpm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

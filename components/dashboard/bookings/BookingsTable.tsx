@@ -23,10 +23,6 @@ export type Payment = {
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "student.name",
-    header: "Student Name",
-  },
-  {
     accessorKey: "tutor.user.name",
     header: "Tutor Name",
   },
@@ -39,7 +35,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     header: "Action",
     cell: ({ row }) => {
-      // const userId = row.original;
+      const userId = row.original;
 
       return (
         <DropdownMenu>

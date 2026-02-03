@@ -77,8 +77,16 @@ export function Login() {
   });
 
   const handleGoogleLogin = () => {
-    toast("Google login clicked");
-    // Add your Google OAuth flow here
+    const toastId = toast.loading("Logging in");
+    try {
+      const data = authClient.signIn.social({
+        provider: "google",
+        callbackURL: "https://skill-bridge-client-olive.vercel.app",
+      });
+      toast.success("User Logged in Successfully", { id: toastId });
+    } catch (error) {
+      toast.error("Something went wrong, please try again.", { id: toastId });
+    }
   };
 
   return (
