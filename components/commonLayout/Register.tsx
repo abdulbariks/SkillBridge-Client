@@ -21,10 +21,12 @@ import {
   FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 // Validation schema using zod
 const registerSchema = z.object({
-  username: z
+  name: z
     .string()
     .min(3, "Username must be at least 3 characters")
     .max(20, "Username must be at most 20 characters"),
@@ -36,9 +38,10 @@ const registerSchema = z.object({
 });
 
 export function Register() {
+  const router = useRouter();
   const form = useForm({
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -46,15 +49,24 @@ export function Register() {
       onSubmit: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      // Here you would call your API to register the user
-      toast("Registration successful!", {
-        description: (
-          <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-            <code>{JSON.stringify(value, null, 2)}</code>
-          </pre>
-        ),
-      });
-      form.reset();
+      const toastId = toast.loading("Registering user");
+      try {
+        const { data, error } = await authClient.signUp.email(value);
+        console.log("====================================");
+        console.log(data);
+        console.log("====================================");
+
+        if (error) {
+          toast.error(error.message, { id: toastId });
+          return;
+        }
+
+        toast.success("User Registered Successfully", { id: toastId });
+
+        router.push("/");
+      } catch (err) {
+        toast.error("Something went wrong, please try again.", { id: toastId });
+      }
     },
   });
 
@@ -79,20 +91,20 @@ export function Register() {
           }}
         >
           <FieldGroup>
-            {/* Username */}
-            <form.Field name="username">
+            {/* Name */}
+            <form.Field name="name">
               {(field) => {
                 const isInvalid =
                   field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Username</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
                     <Input
                       id={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
                       onChange={(e) => field.handleChange(e.target.value)}
-                      placeholder="Your username"
+                      placeholder="Your name"
                       aria-invalid={isInvalid}
                     />
                     {isInvalid && (

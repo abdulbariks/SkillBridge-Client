@@ -43,10 +43,6 @@ export function CreateReviews({ tutorId }: CreateReviewsProps) {
         toast.error("Tutor ID not found");
         return;
       }
-
-      console.log("====================================");
-      console.log(value, tutorId);
-      console.log("====================================");
       try {
         const res = await createReview({
           tutorId,
@@ -69,7 +65,7 @@ export function CreateReviews({ tutorId }: CreateReviewsProps) {
   });
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card className="w-full sm:max-w-md border-none bg-none">
       <CardContent>
         <form
           id="review-form"
