@@ -10,6 +10,9 @@ export async function proxy(request: NextRequest) {
   try {
     const { data } = await userService.getSession();
     session = data;
+    console.log('====================================');
+    console.log('Session Data:', data);
+    console.log('====================================');
   } catch (error) {
     console.error("Error fetching session:", error);
   }

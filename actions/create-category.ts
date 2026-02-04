@@ -8,7 +8,7 @@ const API_URL = env.API_URL;
 
 export async function createCategory(data: { name: string }) {
   const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/categories`, {
+  const res = await fetch(`${API_URL}/v1/api/categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export async function createCategory(data: { name: string }) {
 
 export async function getCategories() {
  const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/categories`, {
+  const res = await fetch(`${API_URL}/v1/api/categories`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -41,7 +41,7 @@ export async function getCategories() {
 
 export async function getUsers() {
  const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/users`, {
+  const res = await fetch(`${API_URL}/v1/api/users`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -57,7 +57,7 @@ export async function getUsers() {
 
 export async function getBookings() {
  const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/bookings`, {
+  const res = await fetch(`${API_URL}/v1/api/bookings`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -72,7 +72,7 @@ export async function getBookings() {
 }
 
 export async function getAllTutors() {
-  const res = await fetch(`${API_URL}/tutors`, {
+  const res = await fetch(`${API_URL}/v1/api/tutors`, {
     headers: {
     },
     cache: "no-store", // always fresh
@@ -93,7 +93,7 @@ export async function createReview(data: {
   comment: string;
 }) {
   const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/reviews`, {
+  const res = await fetch(`${API_URL}/v1/api/reviews`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -111,7 +111,7 @@ export async function createBooking(data: {
   endTime: string;
 }) {
   const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/bookings`, {
+  const res = await fetch(`${API_URL}/v1/api/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export async function createTutorProfileAction(data: {
   categories: { id: string }[];
 }) {
   const cookieStore = await cookies();
-  const res = await fetch(`${API_URL}/tutors`, {
+  const res = await fetch(`${API_URL}/v1/api/tutors`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

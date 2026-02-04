@@ -6,16 +6,16 @@ const AUTH_URL = env.AUTH_URL;
 export const userService = {
   getSession: async function () {
     try {
-      const cookieStore = await cookies();
+      const cookieStore = await cookies()
+
       console.log('====================================');
-      console.log(cookieStore.toString());
+      console.log('Cookie Store:', cookieStore.toString());
       console.log('====================================');
 
       const res = await fetch(`${AUTH_URL}/api/auth/get-session`, {
         headers: {
           Cookie: cookieStore.toString(),
         },
-        credentials: "include",
         cache: "no-store",
       });
 
@@ -31,6 +31,4 @@ export const userService = {
       return { data: null, error: { message: "Something Went Wrong" } };
     }
   },
-
-  
 };

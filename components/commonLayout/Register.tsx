@@ -49,21 +49,16 @@ export function Register() {
       onSubmit: registerSchema,
     },
     onSubmit: async ({ value }) => {
-      const toastId = toast.loading("Registering user");
+      const toastId = toast.loading("Creating user");
       try {
         const { data, error } = await authClient.signUp.email(value);
-        console.log("====================================");
-        console.log(data);
-        console.log("====================================");
 
         if (error) {
           toast.error(error.message, { id: toastId });
           return;
         }
 
-        toast.success("User Registered Successfully", { id: toastId });
-
-        router.push("/");
+        toast.success("User Created Successfully", { id: toastId });
       } catch (err) {
         toast.error("Something went wrong, please try again.", { id: toastId });
       }
@@ -75,7 +70,7 @@ export function Register() {
     try {
       const data = authClient.signIn.social({
         provider: "google",
-        callbackURL: "https://skill-bridge-client-olive.vercel.app",
+        callbackURL: "http://localhost:3000",
       });
       toast.success("User Logged in Successfully", { id: toastId });
     } catch (error) {

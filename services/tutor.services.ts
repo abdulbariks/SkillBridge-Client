@@ -22,7 +22,7 @@ export const tutorService = {
     options?: ServiceOptions,
   ) {
     try {
-      const url = new URL(`${API_URL}/tutors`);
+      const url = new URL(`${API_URL}/v1/api/tutors`);
 
       if (params) {
         Object.entries(params).forEach(([key, value]) => {
@@ -59,7 +59,7 @@ export const tutorService = {
 
   getBlogById: async function (id: string) {
     try {
-      const res = await fetch(`${API_URL}/tutors/${id}`);
+      const res = await fetch(`${API_URL}/v1/api/tutors/${id}`);
 
       const data = await res.json();
 
