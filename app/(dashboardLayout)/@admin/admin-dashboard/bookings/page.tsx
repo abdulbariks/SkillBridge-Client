@@ -5,6 +5,9 @@ import React from "react";
 export const dynamic = "force-dynamic";
 export default async function AdminBookingManagementPage() {
   const bookings = await getBookings();
+  console.log("====================================");
+  console.log("Bookings Data:", bookings);
+  console.log("====================================");
   return (
     <div className="min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

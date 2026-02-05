@@ -59,6 +59,7 @@ export function Register() {
         }
 
         toast.success("User Created Successfully", { id: toastId });
+        router.push("/login");
       } catch (err) {
         toast.error("Something went wrong, please try again.", { id: toastId });
       }
@@ -70,9 +71,14 @@ export function Register() {
     try {
       const data = authClient.signIn.social({
         provider: "google",
-        callbackURL: "http://localhost:3000",
+        callbackURL: process.env.FRONTEND_URL!,
       });
-      toast.success("User Logged in Successfully", { id: toastId });
+
+      console.log("====================================");
+      console.log(data);
+      console.log("====================================");
+      router.push("/");
+      // toast.success("User Logged in Successfully", { id: toastId });
     } catch (error) {
       toast.error("Something went wrong, please try again.", { id: toastId });
     }

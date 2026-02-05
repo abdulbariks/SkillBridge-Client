@@ -81,9 +81,14 @@ export function Login() {
     try {
       const data = authClient.signIn.social({
         provider: "google",
-        callbackURL: "https://skill-bridge-client-olive.vercel.app",
+        callbackURL: process.env.FRONTEND_URL!,
       });
-      toast.success("User Logged in Successfully", { id: toastId });
+
+      console.log("====================================");
+      console.log(data);
+      console.log("====================================");
+      router.push("/");
+      // toast.success("User Logged in Successfully", { id: toastId });
     } catch (error) {
       toast.error("Something went wrong, please try again.", { id: toastId });
     }
